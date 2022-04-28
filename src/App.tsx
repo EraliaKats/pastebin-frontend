@@ -12,9 +12,23 @@ function App(): JSX.Element {
     setTextBody(textBody);
   }
 
-  function handleSubmitPaste() {
-    //store the value of title and textBody
-    //send the values to the bakend
+  async function handleSubmitPaste() {
+    const result = await fetch("http://localhost:4000/pastes", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json"
+              },
+            body: JSON.stringify({
+            title: title,
+            text_body: textBody
+          }),
+    });
+    const resultJson = await result.json();
+        if (result.status === 200) {
+        setTitle("");
+        setTextBody("");
+        console.log("added successfully")
+        } else{ console.log("an error occurred")}
   }
 
   return (
