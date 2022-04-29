@@ -22,7 +22,7 @@ function App(): JSX.Element {
 
   async function handleSubmitPaste() {
     setIsButtonClicked(true);
-    //const result = await fetch("http://localhost:4000/pastes",
+    // const result = await fetch("http://localhost:4000/pastes",
     const result = await fetch(
       "https://tifferalia-pastebin.herokuapp.com/pastes",
       {
@@ -48,19 +48,26 @@ function App(): JSX.Element {
   }
   useEffect(() => {
     const getResult = async () => {
-      // const result = await fetch("http://localhost:4000/summaries") for local testing
+      // const result = await fetch("http://localhost:4000/summaries")
       const result = await fetch(
         "https://tifferalia-pastebin.herokuapp.com/summaries"
       );
       const resultJson: Summary[] = await result.json();
-      console.log(resultJson);
-      console.log("before", summaryList);
       setSummaryList(resultJson);
     };
     getResult();
   }, [isButtonClicked, summaryList]);
 
-  //function displayOneSummary(){}
+  function displayOneSummary(summary: Summary){
+    return (
+      <li key = {summary.summary_id}>
+        <details>
+          <summary> {summary.title}</summary>
+          <p> {summary.summary} </p>
+        </details>
+      </li>
+    )
+  }
 
   if (summaryList.length < 1) {
     return (
@@ -132,7 +139,7 @@ function App(): JSX.Element {
           down!
         </p>
         <ol>
-          <li>{summaryList[0].title}</li>
+          {summaryList.map(displayOneSummary)}
         </ol>
       </>
     );
