@@ -22,7 +22,8 @@ function App(): JSX.Element {
 
   async function handleSubmitPaste() {
     setIsButtonClicked(true);
-    // const result = await fetch("http://localhost:4000/pastes",
+    // const result = await fetch(
+    //   "http://localhost:4000/pastes",
     const result = await fetch(
       "https://tifferalia-pastebin.herokuapp.com/pastes",
       {
@@ -48,12 +49,12 @@ function App(): JSX.Element {
   }
   useEffect(() => {
     const getResult = async () => {
-      // const result = await fetch("http://localhost:4000/summaries")
+      // const result = await fetch("http://localhost:4000/summaries");
       const result = await fetch(
         "https://tifferalia-pastebin.herokuapp.com/summaries"
       );
       const resultJson: Summary[] = await result.json();
-      setSummaryList(resultJson);
+      setSummaryList([...resultJson]);
     };
     getResult();
   }, [isButtonClicked, summaryList]);
