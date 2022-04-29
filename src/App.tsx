@@ -58,15 +58,15 @@ function App(): JSX.Element {
     getResult();
   }, [isButtonClicked, summaryList]);
 
-  function displayOneSummary(summary: Summary){
+  function displayOneSummary(summary: Summary) {
     return (
-      <li key = {summary.summary_id}>
+      <li key={summary.summary_id}>
         <details>
           <summary> {summary.title}</summary>
           <p> {summary.summary} </p>
         </details>
       </li>
-    )
+    );
   }
 
   if (summaryList.length < 1) {
@@ -138,9 +138,7 @@ function App(): JSX.Element {
           Oh you'd like to see more about a summary? Click on it and scroll
           down!
         </p>
-        <ol>
-          {summaryList.map(displayOneSummary)}
-        </ol>
+        <ol>{summaryList.map(displayOneSummary)}</ol>
       </>
     );
   }
